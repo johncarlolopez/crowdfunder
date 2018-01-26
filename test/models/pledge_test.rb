@@ -25,6 +25,16 @@ class PledgeTest < ActiveSupport::TestCase
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
+  test 'Pledge must have dollar amount' do
+     project = new_project
+     owner = new_user
+     owner.save
+     project.user_id = owner.id
+     project.save
+     user = new_user2
+     assert project.invalid?, 'Project should not save with start date in the past'
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
@@ -45,4 +55,21 @@ class PledgeTest < ActiveSupport::TestCase
     )
   end
 
+  def new_user2
+    User.new(
+      first_name:            'Bob',
+      last_name:             'Doel',
+      email:                 'bob@example.com',
+      password:              'passpass2',
+      password_confirmation: 'passpass2'
+    )
+  end
+
+  def new_pledge
+    Pledge.new(
+      dollar_amount: 99.00,
+      project: new_project,
+      user: new_user2
+    )
+  end
 end
