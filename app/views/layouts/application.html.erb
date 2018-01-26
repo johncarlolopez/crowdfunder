@@ -28,14 +28,14 @@
       <% flash.each do |key, message| %>
         <div class="">
           <h4><%= key %></h4>
-          <% if message && message.any?  %>
+          <% if message && message.class != String && message.any?  %>
             <% message.each do |sub_message|  %>
               <h5><%= sub_message %></h5>
             <% end  %>
+          <% else  %>
+            <h5><%= message %></h5>
           <% end  %>
         </div>
-        <!--  -->
-        <!-- <div class="flash-<%= key %>"><%= message %></div> -->
       <% end %>
     <% end  %>
 
