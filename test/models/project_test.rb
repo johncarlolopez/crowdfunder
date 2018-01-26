@@ -1,5 +1,6 @@
 require 'test_helper'
 
+
 class ProjectTest < ActiveSupport::TestCase
 
   test 'valid project can be created' do
@@ -11,6 +12,15 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.valid?
     assert project.persisted?
     assert project.user
+  end
+  test 'project start date must be in the future' do
+     project = new_project
+     owner = new_user
+     owner.save
+     project.user_id = owner.id
+     project.start_date -= 1.day
+     project.save
+     assert project.invalid?, 'Project should not save with start date in the past'
   end
 
   test 'project is invalid without owner' do
