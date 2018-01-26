@@ -13,30 +13,12 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.persisted?
     assert project.user
   end
-  test 'project start date must be in the future' do
-     project = new_project
-     owner = new_user
-     owner.save
-     project.user_id = owner.id
-     project.start_date -= 1.day
-     project.save
-     assert project.invalid?, 'Project should not save with start date in the past'
-  end
 
   test 'project is invalid without owner' do
     project = new_project
     project.user = nil
     project.save
     assert project.invalid?, 'Project should not save without owner.'
-  end
-
-  test 'project start date must be in the future' do
-    project = new_project
-    owner = new_user
-    project.user = owner
-    project.start_date -= 1.day
-    project.save
-    assert project.invalid?, 'Project should not save with start date in the past'
   end
 
   def new_project
