@@ -14,7 +14,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 
 # Database
-gem 'pg'
+  gem 'pg', '=0.21'
 
 # Authentication and authorization
 gem 'bcrypt', '~> 3.1.7'
