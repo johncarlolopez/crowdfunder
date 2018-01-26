@@ -11,9 +11,9 @@ class PledgesController < ApplicationController
     if @pledge.save
       redirect_to project_url(@project), notice: "You have successfully backed #{@project.title}!"
     else
-      flash.now[:alert] = @pledge.errors.full_messages.first
+      flash.now[:alert] = @pledge.errors.full_messages
       render 'projects/show'
     end
   end
-  
+
 end
