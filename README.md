@@ -72,8 +72,8 @@ Good luck!
 ___
 ### Validations
 ___
-  * dollar_amount should be a required field for pledges
-  * Project start date must be in future
+  * **(Complete)** dollar_amount should be a required field for pledges
+  * **(Complete)** Project start date must be in future
   * Project end date must be later than start date
   * A project's goal must be positive number
   * Reward dollar_amount must be positive number
