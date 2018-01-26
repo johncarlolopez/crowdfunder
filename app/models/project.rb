@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   validate :is_start_date_in_future?
 
   def is_start_date_in_future?
-    if start_date.utc.to_f < Time.now.utc.to_f
+    if start_date.utc.to_f < Time.now.utc.midnight.to_f
       errors.add(:start_date, "Project start date must be in the future")
       ap errors
     end
