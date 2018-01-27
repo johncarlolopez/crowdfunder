@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
   end
 
   def is_end_date_after_start_date?
-    if end_date.utc.to_f < start_date.utc.midnight.to_f
+    if end_date.utc.to_f < start_date.utc.to_f
       errors.add(:end_date, "Project end date must be after start date")
     end
   end
