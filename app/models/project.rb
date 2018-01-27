@@ -12,4 +12,10 @@ class Project < ActiveRecord::Base
       errors.add(:start_date, "Project start date must be in the future")
     end
   end
+
+  def is_end_date_after_start_date?
+    if end_date.utc.to_f < start_date.utc.midnight.to_f
+      errors.add(:end_date, "Project end date must be after start date")
+    end
+  end
 end

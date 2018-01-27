@@ -21,6 +21,16 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.invalid?, 'Project should not save without owner.'
   end
 
+  test 'project is invalid with end date before start date' do
+    project = new_project
+    owner = new_user
+    owner.save
+    project.user = owner
+    project.end_date -= 2.months
+    project.save
+    assert project.invalid?, 'Project should not save with end date earlier than start date'
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
