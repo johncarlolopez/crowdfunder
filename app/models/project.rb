@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
 
   validates :title, :description, :goal, :start_date, :end_date, :user_id, presence: true
   validate :is_start_date_in_future?
+  validate :is_end_date_after_start_date?
 
   def is_start_date_in_future?
     if start_date.utc.to_f < Time.now.utc.midnight.to_f

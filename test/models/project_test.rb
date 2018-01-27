@@ -35,7 +35,7 @@ class ProjectTest < ActiveSupport::TestCase
     Project.new(
       title:       'Cool new boardgame',
       description: 'Trade sheep',
-      start_date:  Date.today,
+      start_date:  Date.today + 1.day,
       end_date:    Date.today + 1.month,
       goal:        50000
     )
