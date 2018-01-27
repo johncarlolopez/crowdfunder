@@ -74,8 +74,8 @@ ___
 ___
   * **(Complete)** dollar_amount should be a required field for pledges
   * **(Complete)** Project start date must be in future
-  * Project end date must be later than start date
-  * A project's goal must be positive number
+  * **(Complete)** Project end date must be later than start date
+  * **(Complete)** A project's goal must be positive number
   * Reward dollar_amount must be positive number
   * Add error messages to the project, pledge, sign up, and login forms so that if any validations fail the user can see what went wrong
 ### Accounts
