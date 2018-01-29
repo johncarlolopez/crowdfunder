@@ -10,6 +10,7 @@
 <% end  %>
 <p>Pledged so far: <%= number_to_currency(@total_amount_pledged) %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
+<p>Category: <%= @project.category.name %></p>
 <time class="project-days-left">
   <%= icon('clock-o') %>
   <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
