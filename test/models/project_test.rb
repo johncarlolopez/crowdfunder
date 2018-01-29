@@ -51,7 +51,6 @@ class ProjectTest < ActiveSupport::TestCase
     project.save
     project.category = nil
     project.save
-
     assert project.invalid?
   end
 
