@@ -5,7 +5,14 @@
 <% end %>
 
 <p><%= @project.description %></p>
+<% if @is_pledged_to_project %>
+  <p>You have pledged <%= number_to_currency(@my_total_pledged_to_project) %> to this project</p>
+<% end  %>
+<p>Pledged so far: <%= number_to_currency(@total_amount_pledged) %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
+<time class="project-days-left">
+  <%= icon('clock-o') %>
+  <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
 
