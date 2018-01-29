@@ -99,7 +99,7 @@ ___
 ### Categories
 ___
   * **(Complete)** Add a category model (eg. technology, art) and the ability to create a project under a specific category
-  * Users should be able to browse projects by category
+  * **(Complete)**Users should be able to browse projects by category
 ### Homepage
 ___
   * Create a home page for the app that shows a summary of how many projects have been started, how many have been funded, how much money has been pledged towards successful projects in total
