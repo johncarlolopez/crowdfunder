@@ -25,6 +25,12 @@ class ProjectsController < ApplicationController
         @is_pledged_to_project = false
       end
     end
+    # Create Empty Comment and Progress objects to use in form_for
+    @comment = Comment.new
+    @progress = Progress.new
+    # Collection of comments and progresses to be shown on page
+    @comments = @project.comments
+    @progresses = @project.progresses
   end
 
   def new
@@ -41,7 +47,7 @@ class ProjectsController < ApplicationController
     @project.end_date = params[:project][:end_date]
     @project.image = params[:project][:image]
     @project.user = current_user
-    @project.category_id = params[:project][:category_id]
+    @project.category_id = params[:project][:category]
 
     if @project.save
       redirect_to projects_url
@@ -51,4 +57,21 @@ class ProjectsController < ApplicationController
     end
    end
 
+   def create_progress
+     @progress = Progress.new
+     @progress.message = params[:progress][:message]
+     @progress.user = current_user
+     @progress.project_id = params[:id]
+     puts "******"
+     if @progress.save
+       ap @progress
+       redirect_to project_url(params[:id])
+     else
+       puts "not saved"
+       flash.now[:alert] = @progress.errors.full_messages
+       render :show
+     end
+     puts "******"
+
+   end
 end
