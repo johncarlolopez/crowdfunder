@@ -13,16 +13,16 @@
 
   <body>
     <header class="site-header">
-      <h1 class="logo">Crowdfunder</h1>
+      <h1 class="logo"><%= link_to "Crowdfunder", root_path %></h1>
 
       <nav class="site-nav">
         <% if current_user %>
+          <%= link_to "New Project", new_project_path %> |
           <%= link_to "Logout", :logout, method: :delete %>
         <% else %>
           <%= link_to "Register", new_user_path %> |
           <%= link_to "Login", :login %>
         <% end %>
-      | <%= link_to "Home", root_path %>  
       </nav>
     </header>
     <% if flash && flash.any?  %>

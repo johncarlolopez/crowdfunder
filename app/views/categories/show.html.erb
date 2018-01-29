@@ -1,9 +1,4 @@
-<div class="category-nav">
-<% @categories.each do |category| %>
-  <%= link_to("#{category.name}", category_path(category.id) ) %>
-<% end %>
-</div>
-
+<% if @projects.any? %>
 <% @projects.each do |project| %>
   <article class="project">
     <%= link_to project, class: 'project-link' do %>
@@ -18,6 +13,12 @@
       <time class="project-days-left">
         <%= icon('clock-o') %>
         <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+        <br>
     <% end %>
   </article>
+<% end %>
+<% else %>
+  <br>  <br>  <br>  <br>  <br>  <br>
+  <p><center> No projects in this Category!</center></p>
+  <br>  <br>  <br>  <br>  <br>  <br>
 <% end %>
