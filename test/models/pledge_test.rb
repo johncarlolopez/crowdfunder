@@ -32,7 +32,10 @@ class PledgeTest < ActiveSupport::TestCase
      project.user_id = owner.id
      project.save
      user = new_user2
-     assert project.invalid?, 'Project should not save with start date in the past'
+     pledge = new_pledge
+     pledge.dollar_amount = nil
+     pledge.save
+     assert pledge.invalid?, 'Pledge should be invalid if there is no dollar amount'
   end
 
   def new_project
