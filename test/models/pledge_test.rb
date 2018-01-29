@@ -38,6 +38,33 @@ class PledgeTest < ActiveSupport::TestCase
      assert pledge.invalid?, 'Pledge should be invalid if there is no dollar amount'
   end
 
+  test 'Pledge must be above zero' do
+     project = new_project
+     owner = new_user
+     owner.save
+     project.user_id = owner.id
+     project.save
+     user = new_user2
+     pledge = new_pledge
+     pledge.dollar_amount = -1
+     pledge.save
+     assert pledge.invalid?, 'Pledge should be invalid if dollar amount is under $0'
+  end
+
+  test 'Pledge creates if dollar amount is zero or above ' do
+     project = new_project
+     owner = new_user
+     owner.save
+     project.user_id = owner.id
+     project.save
+     user = new_user2
+     pledge = new_pledge
+     pledge.dollar_amount = 0
+     pledge.save
+     assert pledge.valid?, 'Pledge should be valid if dollar amount is over or equal to $0'
+
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
