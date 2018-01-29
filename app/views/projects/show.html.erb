@@ -37,6 +37,7 @@
 
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
 
+<!-- START Section for Users who have pledged -->
 <% if current_user && @project.user_id = current_user.id %>
 <h3>Users who have pledged to your project:</h3>
   <% @pledges.each do |pledge| %>
@@ -45,3 +46,30 @@
     </div>
   <% end  %>
 <% end  %>
+<!-- END Section for Users who have pledged -->
+
+<!-- START Section show progress-->
+<% if @progresses && @progresses.count > 0 %>
+  <% @progresses.each do |progress| %>
+    <p><%= progress.created_at %>: <%= progress.message %></p>
+  <% end  %>
+<% end %>
+<!-- END Section show progress-->
+
+<!-- START Section for Project owner to update progress-->
+<%= form_for [@project,@progress], :url => create_progress_path(@project.id) do |f| %>
+  <p>
+    <%= f.label :message %>
+    <%= f.text_field :message %>
+    <%= f.submit "Add progress" %>
+  </p>
+<% end  %>
+
+<!-- END Section for Project owner to update progress-->
+
+
+<!-- START Section show comments-->
+<!-- END Section show comments-->
+
+<!-- START Section for pledger to add comment-->
+<!-- END Section for pledger to add comment-->

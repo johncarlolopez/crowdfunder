@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   resources :user_sessions, only: [:create]
 
+  post '/projects/:id/progress' => 'projects#create_progress', :as => :create_progress
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
