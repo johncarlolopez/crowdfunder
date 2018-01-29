@@ -36,7 +36,7 @@ class ProjectTest < ActiveSupport::TestCase
     owner = new_user
     owner.save
     project.user = owner
-    project.goal -= 50001
+    project.goal = -1
     project.save
     assert project.invalid?, 'Project should not save without goal being positive number'
   end
