@@ -30,7 +30,8 @@ end
              goal: rand(100000),
              start_date: Time.now.utc.midnight,
              end_date: Time.now.utc + rand(10).days,
-             user: User.last
+             user: User.last,
+             category: Category.all.sample
            )
 
  5.times do
