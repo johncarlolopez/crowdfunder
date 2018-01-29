@@ -13,23 +13,6 @@ Category.create(name: "Music")
 Category.create(name: "Illustration")
 Category.create(name: "Food")
 
-10.times do
-  project = Project.create!(
-              title: Faker::App.name,
-              description: Faker::Lorem.paragraph,
-              goal: rand(100000),
-              start_date: Time.now.utc - rand(60).days,
-              end_date: Time.now.utc + rand(10).days
-            )
-
-  5.times do
-    project.rewards.create!(
-      description: Faker::Superhero.power,
-      dollar_amount: rand(100),
-    )
-  end
-end
-
 5.times do
   User.create!(
     first_name: Faker::Name.first_name,
@@ -40,11 +23,29 @@ end
   )
 end
 
+10.times do
+  project = Project.create!(
+              title: Faker::App.name,
+              description: Faker::Lorem.paragraph,
+              goal: rand(100000),
+              start_date: Time.now.utc.midnight,
+              end_date: Time.now.utc + rand(10).days,
+              user: User.last
+            )
+
+  5.times do
+    project.rewards.create!(
+      description: Faker::Superhero.power,
+      dollar_amount: rand(100),
+    )
+  end
+end
+
 20.times do
   project = Project.all.sample
 
   Pledge.create!(
-    user: User.all.sample,
+    user: User.all[0..-2].sample,
     project: project,
     dollar_amount: project.rewards.sample.dollar_amount + rand(10)
   )
