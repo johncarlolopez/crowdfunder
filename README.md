@@ -84,9 +84,9 @@ ___
   * **(Complete)** As a user, when I go to a project’s page, I should be able to see who the project’s owner is and follow a link to their profile page to see what other projects they own and have backed
 ### Project page
 ___
-  * As a user, when I go to a project’s page, I should see how much money has been pledged so far
-  * As a user, when I go to a project’s page, it should tell me if I have already backed that project or not
-  * As a user, when I go to a project’s page, it should tell me how much time is left until the funding deadline (like it does on the project index currently)
+  * **(Complete)** As a user, when I go to a project’s page, I should see how much money has been pledged so far
+  * **(Complete)** As a user, when I go to a project’s page, it should tell me if I have already backed that project or not
+  * **(Complete)** As a user, when I go to a project’s page, it should tell me how much time is left until the funding deadline (like it does on the project index currently)
 ### Project owners
 ___
   * As a project owner, when I go to my project’s page, I should see a list of who has backed my project
