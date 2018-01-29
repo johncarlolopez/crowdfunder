@@ -15,15 +15,17 @@ class ProjectsController < ApplicationController
       @total_amount_pledged += pledge.dollar_amount
     }
     # Default pledge to project as false unless there are pledges by user to project
-    @my_pledges = @pledges.all.where('user_id = ?', current_user.id).all
-    if @my_pledges.count > 0
-      @my_total_pledged_to_project = 0
-      @is_pledged_to_project = true
-      @my_pledges.each {|pledge|
-        @my_total_pledged_to_project += pledge.dollar_amount
-      }
-    else
-      @is_pledged_to_project = false
+    if current_user
+      @my_pledges = @pledges.all.where('user_id = ?', current_user.id).all
+      if @my_pledges.count > 0
+        @my_total_pledged_to_project = 0
+        @is_pledged_to_project = true
+        @my_pledges.each {|pledge|
+          @my_total_pledged_to_project += pledge.dollar_amount
+        }
+      else
+        @is_pledged_to_project = false
+      end
     end
   end
 
