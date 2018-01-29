@@ -4,16 +4,14 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
+    @categories = Category.all
   end
 
   def show
     @project = Project.find(params[:id])
     @pledges = @project.pledges
     # Calculate total amount pledge to project
-    @total_amount_pledged = 0
-    @pledges.each {|pledge|
-      @total_amount_pledged += pledge.dollar_amount
-    }
+    @total_amount_pledged = @pledges.sum(:dollar_amount)
     # Default pledge to project as false unless there are pledges by user to project
     if current_user
       @my_pledges = @pledges.all.where('user_id = ?', current_user.id).all
