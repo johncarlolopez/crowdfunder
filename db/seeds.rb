@@ -2,6 +2,16 @@ Pledge.destroy_all
 Reward.destroy_all
 User.destroy_all
 Project.destroy_all
+Category.delete_all
+
+Category.create(name: "Art")
+Category.create(name: "Technology")
+Category.create(name: "Design")
+Category.create(name: "Games")
+Category.create(name: "Crafts")
+Category.create(name: "Music")
+Category.create(name: "Illustration")
+Category.create(name: "Food")
 
 10.times do
   project = Project.create!(
