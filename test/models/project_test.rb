@@ -12,6 +12,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.valid?
     assert project.persisted?
     assert project.user
+
   end
 
   test 'project is invalid without owner' do
@@ -41,15 +42,30 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.invalid?, 'Project should not save without goal being positive number'
   end
 
+
+  test 'A category is assiged to a project' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.user = owner
+    project.save
+    project.category = nil
+    project.save
+
+    assert project.invalid?
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
       description: 'Trade sheep',
       start_date:  Date.today + 1.day,
       end_date:    Date.today + 1.month,
-      goal:        50000
+      goal:        50000,
+      category_id: 1
     )
   end
+
 
   def new_user
     User.new(
