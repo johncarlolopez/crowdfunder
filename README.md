@@ -81,7 +81,7 @@ ___
 ### Accounts
 ___
   * **(Complete)** As a user I should be able to visit my profile page and see a list of all the projects I have backed, the total amount I have pledged on the site, and a list of all the projects I own
-  * As a user, when I go to a project’s page, I should be able to see who the project’s owner is and follow a link to their profile page to see what other projects they own and have backed
+  * **(Complete)** As a user, when I go to a project’s page, I should be able to see who the project’s owner is and follow a link to their profile page to see what other projects they own and have backed
 ### Project page
 ___
   * As a user, when I go to a project’s page, I should see how much money has been pledged so far
