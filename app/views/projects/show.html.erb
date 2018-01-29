@@ -8,6 +8,8 @@
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+<p>Created by: <%= @project.user.first_name %> <%= @project.user.last_name %>
+  <span class="owner-link">[<%= link_to 'view profile', user_path(@project.user) %>]</span> </p>
 
 <%= form_for [@project, Pledge.new] do |f| %>
   <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
