@@ -1,0 +1,16 @@
+<h1><%= @user.first_name %>'s Profile</h1>
+
+<h2>Projects I've Supported:</h2>
+<% @pledged_projects.each do |project| %>
+  <h3><%= project.title %></h3>
+<% end %>
+
+<h3>I've contributed a total of $<%= @total_pledged %> on Crowdfunder</h3>
+
+<h2>My projects:</h2>
+<% @projects.each do |project| %>
+  <h3><%= project.title %></h3>
+  <p><%= project.description %></p>
+  <p>Start Date: <%= project.start_date %></p>
+  <p>End Date: <%= project.end_date %></p>
+<% end %>
