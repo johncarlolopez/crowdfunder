@@ -98,7 +98,7 @@ ___
   * As a backer I should be able to leave a comment on a project I have backed
 ### Categories
 ___
-  * Add a category model (eg. technology, art) and the ability to create a project under a specific category
+  * **(Complete)** Add a category model (eg. technology, art) and the ability to create a project under a specific category
   * Users should be able to browse projects by category
 ### Homepage
 ___
