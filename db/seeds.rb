@@ -13,13 +13,24 @@ Category.create(name: "Music")
 Category.create(name: "Illustration")
 Category.create(name: "Food")
 
+5.times do
+  User.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.free_email,
+    password: 'password',
+    password_confirmation: 'password'
+  )
+end
+
 10.times do
   project = Project.create!(
               title: Faker::App.name,
               description: Faker::Lorem.paragraph,
               goal: rand(100000),
               start_date: Time.now.utc - rand(60).days,
-              end_date: Time.now.utc + rand(10).days
+              end_date: Time.now.utc + rand(10).days,
+              user: User.all.sample
             )
 
   5.times do
@@ -30,15 +41,7 @@ Category.create(name: "Food")
   end
 end
 
-5.times do
-  User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.free_email,
-    password: 'password',
-    password_confirmation: 'password'
-  )
-end
+
 
 20.times do
   project = Project.all.sample
