@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     @project.end_date = params[:project][:end_date]
     @project.image = params[:project][:image]
     @project.user = current_user
-    @project.category_id = params[:project][:category]
+    @project.category_id = params[:project][:category_id]
 
     if @project.save
       redirect_to projects_url
