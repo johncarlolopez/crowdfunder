@@ -1,15 +1,19 @@
-<h1>Add a reward for <%= @project.title %></h1>
+<h3>Add a reward for <%= @project.title %></h3>
 
-<%= form_for [@project, @reward] do |f| %>
-  <div>
-    <%= f.label :dollar_amount %>
-    <%= f.number_field :dollar_amount, step: 0.01 %>
-  </div>
+<div class="form">
+  <%= form_for [@project, @reward] do |f| %>
+    <div>
+      <%= f.label :dollar_amount %>
+      <%= f.number_field :dollar_amount, step: 0.01 %>
+    </div>
+    <br> <br>
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <br> <br>
+    <%= f.submit %>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-
-  <%= f.submit %>
-<% end %>
+<br> <br> <br> <br> <br> <br> <br>
