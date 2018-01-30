@@ -12,7 +12,7 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'awesome_print'
 gem 'pry-rails'
 # gem 'factory_girl_rails'
-gem 'factory_bot'
+gem 'factory_bot_rails'
 
 # JS
 gem 'uglifier', '>= 1.3.0'
