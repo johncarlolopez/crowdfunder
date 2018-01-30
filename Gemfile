@@ -8,9 +8,12 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails'
 gem 'font-awesome-sass', '~> 4.7.0'
 
-# Debug
+# Debug/test
 gem 'awesome_print'
 gem 'pry-rails'
+# gem 'factory_girl_rails'
+gem 'factory_bot'
+
 # JS
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
