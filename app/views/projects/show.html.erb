@@ -42,7 +42,7 @@
 
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
 
-<!-- START Section for Users who have pledged -->
+<!-- START If owner show users who have pledged -->
 <% if current_user && @project.user_id == current_user.id %>
 <h3>Users who have pledged to your project:</h3>
   <% @pledges.each do |pledge| %>
@@ -51,30 +51,46 @@
     </div>
   <% end  %>
 <% end  %>
-<!-- END Section for Users who have pledged -->
+<!-- END If owner show users who have pledged -->
 
-<!-- START Section show progress-->
-<% if @progresses && @progresses.count > 0 %>
-  <% @progresses.each do |progress| %>
-    <p><%= progress.created_at %>: <%= progress.message %></p>
-  <% end  %>
-<% end %>
-<!-- END Section show progress-->
+<!-- START Section show progress if pledged-->
+<% if current_user && @is_pledged_to_project%>
+  <% if @progresses && @progresses.count > 0 %>
+    <% @progresses.each do |progress| %>
+      <p><%= progress.created_at %>: <%= progress.message %></p>
+    <% end  %>
+  <% end %>
+<% end  %>
+<!-- END Section show progress if pledged-->
 
 <!-- START Section for Project owner to update progress-->
-<%= form_for [@project,@progress], :url => create_progress_path(@project.id) do |f| %>
-  <p>
-    <%= f.label :message %>
-    <%= f.text_field :message %>
-    <%= f.submit "Add progress" %>
-  </p>
+<% if current_user && @project.user_id == current_user.id %>
+  <%= form_for [@project,@progress], :url => create_progress_path(@project.id) do |f| %>
+    <p>
+      <%= f.label :message %>
+      <%= f.text_field :message %>
+      <%= f.submit "Add progress" %>
+    </p>
+  <% end  %>
 <% end  %>
-
 <!-- END Section for Project owner to update progress-->
 
+<!-- START Section for pledger to add comment-->
+<% if current_user && @is_pledged_to_project%>
+  <%= form_for [@project,@comment], :url => create_comment_path(@project.id) do |f| %>
+    <p>
+      <%= f.label :message %>
+      <%= f.text_field :message %>
+      <%= f.submit "Add Comment" %>
+    </p>
+  <% end  %>
+<% end  %>
+<!-- END Section for pledger to add comment-->
 
 <!-- START Section show comments-->
+  <% if @comments && @comments.count > 0 %>
+    <% @comments.each do |comment| %>
+      <p><%= comment.created_at %>: <%= comment.message %></p>
+    <% end  %>
+  <% end %>
 <!-- END Section show comments-->
-
-<!-- START Section for pledger to add comment-->
-<!-- END Section for pledger to add comment-->
