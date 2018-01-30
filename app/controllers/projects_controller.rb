@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     @comment = Comment.new
     @progress = Progress.new
     # Collection of comments and progresses to be shown on page
-    @comments = @project.comments
+    @comments = @project.comments.all.order(created_at: :desc)
     @progresses = @project.progresses.all.order(created_at: :desc)
   end
 
@@ -59,12 +59,23 @@ class ProjectsController < ApplicationController
      @progress.user = current_user
      @progress.project_id = params[:id]
      if @progress.save
-       ap @progress
        redirect_to project_url(params[:id])
      else
        flash.now[:alert] = @progress.errors.full_messages
        render :show
      end
+   end
 
+   def create_comment
+     @comment = Comment.new
+     @comment.message = params[:comment][:message]
+     @comment.user = current_user
+     @comment.project_id = params[:id]
+     if @comment.save
+       redirect_to project_url(params[:id])
+     else
+       flash.now[:alert] = @comment.errors.full_messages
+       render :show
+     end
    end
 end
