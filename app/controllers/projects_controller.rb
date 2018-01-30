@@ -4,7 +4,6 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
-    @categories = Category.all
   end
 
   def show
@@ -16,11 +15,8 @@ class ProjectsController < ApplicationController
     if current_user
       @my_pledges = @pledges.all.where('user_id = ?', current_user.id).all
       if @my_pledges.count > 0
-        @my_total_pledged_to_project = 0
         @is_pledged_to_project = true
-        @my_pledges.each {|pledge|
-          @my_total_pledged_to_project += pledge.dollar_amount
-        }
+        @my_total_pledged_to_project = @my_pledges.sum(:dollar_amount)
       else
         @is_pledged_to_project = false
       end
@@ -30,7 +26,7 @@ class ProjectsController < ApplicationController
     @progress = Progress.new
     # Collection of comments and progresses to be shown on page
     @comments = @project.comments
-    @progresses = @project.progresses
+    @progresses = @project.progresses.all.order(created_at: :desc)
   end
 
   def new
@@ -47,7 +43,7 @@ class ProjectsController < ApplicationController
     @project.end_date = params[:project][:end_date]
     @project.image = params[:project][:image]
     @project.user = current_user
-    @project.category_id = params[:project][:category]
+    @project.category_id = params[:project][:category_id]
 
     if @project.save
       redirect_to projects_url
@@ -62,16 +58,13 @@ class ProjectsController < ApplicationController
      @progress.message = params[:progress][:message]
      @progress.user = current_user
      @progress.project_id = params[:id]
-     puts "******"
      if @progress.save
        ap @progress
        redirect_to project_url(params[:id])
      else
-       puts "not saved"
        flash.now[:alert] = @progress.errors.full_messages
        render :show
      end
-     puts "******"
 
    end
 end

@@ -16,3 +16,31 @@
 
 // Module styles
 @import 'projects';
+
+.form {
+  border: 1px black solid;
+  border-radius: 3px;
+  margin-left: 42%;
+  padding: 25px;
+  display: inline-block;
+}
+
+.form-project {
+  border: 1px black solid;
+  border-radius: 3px;
+  margin-left: 39%;
+  padding: 25px;
+  display: inline-block;
+}
+
+h3 {
+  text-align: center;
+  margin: 40px;
+}
+
+.flash {
+  text-align: center;
+  background-color: crimson;
+  margin-bottom: 5px;
+  color: white;
+}

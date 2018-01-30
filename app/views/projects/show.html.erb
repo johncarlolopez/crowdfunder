@@ -43,7 +43,7 @@
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
 
 <!-- START Section for Users who have pledged -->
-<% if current_user && @project.user_id = current_user.id %>
+<% if current_user && @project.user_id == current_user.id %>
 <h3>Users who have pledged to your project:</h3>
   <% @pledges.each do |pledge| %>
     <div class="pledge">

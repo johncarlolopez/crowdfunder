@@ -1,9 +1,4 @@
-<div class="category-nav">
-<% @categories.each do |category| %>
-  <%= link_to("#{category.name}", category_path(category.id) ) %>
-<% end %>
-</div>
-
+<div class="flex">
 <% @projects.each do |project| %>
   <article class="project">
     <%= link_to project, class: 'project-link' do %>
@@ -21,3 +16,4 @@
     <% end %>
   </article>
 <% end %>
+</div>
