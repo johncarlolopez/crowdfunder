@@ -11,9 +11,14 @@
       <%= f.label :description %>
       <%= f.text_area :description %>
     </div>
-    <br> <br>
+    <br><br>
+    <div>
+      <%= f.label :max_claims, "Maximum Available" %>
+      <%= f.number_field :max_claims %>
+      <span>optional: If blank, no limit on claims is set</span>
+    </div>
+    <br><br>
     <%= f.submit %>
   <% end %>
 </div>
-
 <br> <br> <br> <br> <br> <br> <br>

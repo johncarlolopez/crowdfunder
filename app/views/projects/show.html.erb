@@ -28,7 +28,11 @@
 <% @project.rewards.each do |reward| %>
   <p><%= number_to_currency(reward.dollar_amount) %></p>
   <p><%= reward.description %></p>
-
+  <% if reward.max_claims %>
+    <p>Available: <%= reward.max_claims %>, Claimed: <%= reward.total_claims %></p>
+  <% else %>
+    <p>Claimed: <%= reward.total_claims %></p>
+  <% end %>
   <p>
     <small>
       <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>

@@ -12,4 +12,19 @@ class Pledge < ApplicationRecord
       errors.add(:user, "You can't pledge to your own project")
     end
   end
+
+  # THIS STILL NEEDS TO BE TESTED
+  def reward_claimed  # this is only called upon creation of a pledge, as it indexes the total_claims column in the rewards table by 1
+    project.rewards.order(:dollar_amount).reverse.each do |reward|
+      # check dollar_amount of pledge vs reward, if they get it and total_claims is less than max_claims, give it
+      if (!reward.max_claims && dollar_amount >= reward.dollar_amount) ||  #no max_claims, just give the reward
+          (reward.max_claims && dollar_amount >= reward.dollar_amount && reward.total_claims < reward.max_claims)
+        # index total_claims by 1, return the reward object
+        reward.total_claims += 1
+        reward.save
+        return reward
+      end
+    end
+    return false
+  end
 end
