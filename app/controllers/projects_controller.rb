@@ -4,7 +4,6 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
-    @categories = Category.all
   end
 
   def show
