@@ -25,6 +25,7 @@
         <% end %>
       </nav>
     </header>
+    <div class="flash">
     <% if flash && flash.any?  %>
       <% flash.each do |key, message| %>
         <div class="">
@@ -39,14 +40,14 @@
         </div>
       <% end %>
     <% end  %>
-
+  </div>
 
     <main>
       <%= yield %>
     </main>
 
     <footer class="site-footer">
-      <small>A Bitmaker assignment</small>
+      <center><small>a bitmaker assignment</small></center>
     </footer>
   </body>
 </html>
