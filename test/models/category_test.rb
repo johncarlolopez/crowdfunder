@@ -1,16 +1,15 @@
 require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   test 'A category exists' do
-    Category.create(name: "Art")
-    expected = "Art"
-    actual = Category.first.name
+    category = build(:category)
+    assert( category )
+  end
 
-    assert_equal(expected, actual)
+  test 'A category exists with a specific name' do
+    category = build(:category, name: "Art")
+    assert_equal( "Art", category.name )
   end
 
 end
