@@ -35,16 +35,16 @@
     <p><%= reward.description %></p>
     <% if reward.max_claims %>
     <p>Available: <%= reward.max_claims %>, Claimed: <%= reward.total_claims %></p>
-  <% else %>
+    <% else %>
     <p>Claimed: <%= reward.total_claims %></p>
-  <% end %>
+    <% end %>
     <p>
       <small>
         <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
       </small>
     </p>
   <% end %>
- <% end %>
+
 
 
   <%= link_to "Add new reward", new_project_reward_path(@project) %>
@@ -106,4 +106,5 @@
       <p><%= comment.created_at %>: <%= comment.message %></p>
     <% end  %>
   <% end %>
+<% end %>
 <!-- END Section show comments-->
