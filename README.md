@@ -107,6 +107,13 @@ ___
 ___
   * As a user I want to be able to search for projects by name
 
+## Our To-do list 
+
+* Make a default image when project is created if image field is empty
+* Seperate Rewards and Comments Sections
+* Transfer projects controller methods into model methods -> Then test them
+
+
 ## Resources
 ___
   [A Guide to Testing Rails Applications](http://guides.rubyonrails.org/testing.html)
