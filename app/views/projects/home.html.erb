@@ -1,0 +1,28 @@
+<div class="card">
+  <center>
+    <p><h2>Number of Projects</h2></p>
+    <h1><%= @projects.count %></h1>
+  </center>
+</div>
+
+<div class="card">
+  <center>
+    <p><h2>Number of Projects Funded</h2></p>
+    <h1><%= @num_projects %></h1>
+  </center>
+</div>
+
+
+<div class="card">
+  <center>
+    <p><h2>Number of Projects Successfully Funded</h2></p>
+      <% count = 0 %>
+      <% @projects.each do |project| %>
+        <% count += 1 if project.has_met_goal? %>
+      <% end %>
+      <h1><%= count %></h1>
+
+  </center>
+</div>
+
+<br> <br> <br> <br> <br> <br>
