@@ -1,14 +1,5 @@
 <h3>Add a reward for <%= @project.title %></h3>
 
-<% if @reward.errors.any? %>
-<div class="errors">
-  <h4>Reward not created because:</h4>
-    <% @reward.errors.full_messages.each do |msg| %>
-    <h5><%= msg %></h5>
-    <% end %>
-</div>
-<% end %>
-
 <div class="form">
   <%= form_for [@project, @reward] do |f| %>
     <div>
