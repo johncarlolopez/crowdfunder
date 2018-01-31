@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :user_sessions, only: [:create]
 
   post '/projects/:id/progress' => 'projects#create_progress', :as => :create_progress
+  post '/projects/:id/comment' => 'projects#create_comment', :as => :create_comment
   resources :categories, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.

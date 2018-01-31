@@ -13,14 +13,14 @@ class Project < ActiveRecord::Base
   validate :is_end_date_after_start_date?
 
   def is_start_date_in_future?
-    if start_date.utc.to_f < Time.now.utc.midnight.to_f
-      errors.add(:start_date, "Project start date must be in the future")
+    if start_date && start_date.utc.to_f < Time.now.utc.midnight.to_f
+      errors.add(:start_date, "must be in the future")
     end
   end
 
   def is_end_date_after_start_date?
-    if end_date.utc.to_f < start_date.utc.to_f
-      errors.add(:end_date, "Project end date must be after start date")
+    if start_date && end_date &&  end_date.utc.to_f < start_date.utc.to_f
+      errors.add(:end_date, "must be after start date")
     end
   end
 

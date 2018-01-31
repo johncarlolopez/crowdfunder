@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   def pledged_projects
     pledges.map { |pledge| pledge.project }.uniq
   end
-
+  # NEED TESTS FOR THIS - SEE SEAN
   def pledged_projects
     pledges.map(&:project).uniq
   end

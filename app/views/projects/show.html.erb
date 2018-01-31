@@ -21,6 +21,7 @@
   <p>Created by: <%= @project.user.first_name %> <%= @project.user.last_name %>
     <span class="owner-link">[<%= link_to 'view profile', user_path(@project.user) %>]</span> </p>
 
+
   <%= form_for [@project, Pledge.new] do |f| %>
     <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
     <%= f.submit "Pledge" %>
@@ -32,17 +33,24 @@
   <% @project.rewards.each do |reward| %>
     <p><%= number_to_currency(reward.dollar_amount) %></p>
     <p><%= reward.description %></p>
-
+    <% if reward.max_claims %>
+    <p>Available: <%= reward.max_claims %>, Claimed: <%= reward.total_claims %></p>
+  <% else %>
+    <p>Claimed: <%= reward.total_claims %></p>
+  <% end %>
     <p>
       <small>
         <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
       </small>
     </p>
   <% end %>
+ <% end %>
+
 
   <%= link_to "Add new reward", new_project_reward_path(@project) %>
 
-  <!-- START Section for Users who have pledged -->
+
+ <!-- START Section for Users who have pledged -->
   <% if current_user && @project.user_id = current_user.id %>
   <h3>Users who have pledged to your project:</h3>
     <% @pledges.each do |pledge| %>
@@ -54,14 +62,19 @@
   <!-- END Section for Users who have pledged -->
 
   <!-- START Section show progress-->
+  <% if current_user && @is_pledged_to_project%>
+
   <% if @progresses && @progresses.count > 0 %>
     <% @progresses.each do |progress| %>
       <p><%= progress.created_at %>: <%= progress.message %></p>
     <% end  %>
   <% end %>
-  <!-- END Section show progress-->
 
-  <!-- START Section for Project owner to update progress-->
+<% end  %>
+<!-- END Section show progress if pledged-->
+
+<!-- START Section for Project owner to update progress-->
+<% if current_user && @project.user_id == current_user.id %>
   <%= form_for [@project,@progress], :url => create_progress_path(@project.id) do |f| %>
     <p>
       <%= f.label :message %>
@@ -69,13 +82,28 @@
       <%= f.submit "Add progress" %>
     </p>
   <% end  %>
+
   </div>
 </div>
+
 <!-- END Section for Project owner to update progress-->
 
+<!-- START Section for pledger to add comment-->
+<% if current_user && @is_pledged_to_project%>
+  <%= form_for [@project,@comment], :url => create_comment_path(@project.id) do |f| %>
+    <p>
+      <%= f.label :message %>
+      <%= f.text_field :message %>
+      <%= f.submit "Add Comment" %>
+    </p>
+  <% end  %>
+<% end  %>
+<!-- END Section for pledger to add comment-->
 
 <!-- START Section show comments-->
+  <% if @comments && @comments.count > 0 %>
+    <% @comments.each do |comment| %>
+      <p><%= comment.created_at %>: <%= comment.message %></p>
+    <% end  %>
+  <% end %>
 <!-- END Section show comments-->
-
-<!-- START Section for pledger to add comment-->
-<!-- END Section for pledger to add comment-->
