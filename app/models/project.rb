@@ -59,5 +59,8 @@ class Project < ActiveRecord::Base
     return pledgetotal
   end
 
+  def self.search(term)
+    where('title ILIKE ?', "%#{sanitize_sql_like(term)}%")
+  end
 
 end

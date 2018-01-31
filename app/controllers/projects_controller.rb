@@ -4,6 +4,11 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
+    @projects = if params[:term]
+      Project.search(params[:term])
+        else
+      Project.all
+    end
   end
 
   def home
@@ -40,16 +45,15 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new
-    @project.title = params[:project][:title]
-    @project.description = params[:project][:description]
-    @project.goal = params[:project][:goal]
-    @project.start_date = params[:project][:start_date]
-    @project.end_date = params[:project][:end_date]
-    @project.image = params[:project][:image]
+    @project = Project.new(project_params)
+    # @project.title = params[:project][:title]
+    # @project.description = params[:project][:description]
+    # @project.goal = params[:project][:goal]
+    # @project.start_date = params[:project][:start_date]
+    # @project.end_date = params[:project][:end_date]
+    # @project.image = params[:project][:image]
     @project.user = current_user
-    @project.category_id = params[:project][:category_id]
-
+    # @project.category_id = params[:project][:category_id]
     if @project.save
       redirect_to projects_url
     else
@@ -83,4 +87,9 @@ class ProjectsController < ApplicationController
        render :show
      end
    end
+
+   def project_params
+     params.require(:projects).permit(:title, :description, :goal, :start_date, :end_date, :image, :category_id)
+   end
+
 end

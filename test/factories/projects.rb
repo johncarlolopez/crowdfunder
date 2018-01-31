@@ -5,7 +5,7 @@ FactoryBot.define do
     goal                    5000
     start_date              {Time.now.utc}
     end_date                {Time.now + 1.month}
-    user_id                 1
-    category_id             1
+    user
+    category
   end
 end

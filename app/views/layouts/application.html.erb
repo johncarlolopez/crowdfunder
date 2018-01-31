@@ -32,8 +32,11 @@
             <%= link_to("#{category.name}", category_path(category.id) ) %>
           <% end %>
           </div>
-        <br>
-
+        <br> <br>
+        <%= form_tag(projects_path, method: :get) do %>
+          <%= text_field_tag :term, params[:term]  %>
+          <%= submit_tag 'Search' %>
+        <% end %>
       </nav>
 
     </header>
