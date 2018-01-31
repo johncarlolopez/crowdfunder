@@ -42,4 +42,30 @@ class ProjectTest < ActiveSupport::TestCase
     project.save
     assert project.invalid?
   end
+
+  test 'A project has met their goal' do
+    project = build(:project, goal: 5000)
+    project.pledges.new(dollar_amount: 5000)
+    assert(project.has_met_goal?)
+  end
+
+  test 'A project has not met their goal' do
+    project = build(:project, goal: 5000)
+    project.pledges.new(dollar_amount: 10)
+    refute(project.has_met_goal?)
+  end
+
+  test 'A project has went above their goal' do
+    project = build(:project, goal: 5000)
+    project.pledges.new(dollar_amount: 10000)
+    assert(project.has_met_goal?)
+  end
+
+  test 'How many projects have been pledged too' do
+    pledge1 = create(:pledge)
+    pledge2 = create(:pledge)
+    # binding.pry
+    assert_equal( 2, Project.all.sample.num_pledged )
+  end
+
 end
