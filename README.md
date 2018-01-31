@@ -94,7 +94,7 @@ ___
   * **(Complete)** As a project owner, when I create a new project, I should have the option of setting a limit for how many times a specific reward can be claimed
   * **(Complete)** As a project owner I should be able to post updates on the progress of my project.
   * **(Complete)** As a backer, when I go to the page of a project I have backed, I should see all the updates from the owner in reverse chronological order
-  * As a user, when I go to the page of a fully funded project that is past its deadline that I have not backed, I should only see updates about that project from before the funding deadline. Updates for funded projects that were made after funding ended are for backers’ (and the owner’s) eyes only.
+  * **(Complete)** As a user, when I go to the page of a fully funded project that is past its deadline that I have not backed, I should only see updates about that project from before the funding deadline. Updates for funded projects that were made after funding ended are for backers’ (and the owner’s) eyes only.
   * **(Complete)** As a backer I should be able to leave a comment on a project I have backed
 ### Categories
 ___

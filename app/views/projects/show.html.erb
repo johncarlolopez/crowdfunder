@@ -7,10 +7,10 @@
   <% end %>
 
   <p><%= @project.description %></p>
-  <% if @is_pledged_to_project %>
-    <p>You have pledged <%= number_to_currency(@my_total_pledged_to_project) %> to this project</p>
+  <% if @project.is_pledged?(current_user) %>
+    <p>You have pledged <%= number_to_currency(@project.current_user_pledges_sum(current_user)) %> to this project</p>
   <% end  %>
-  <p>Pledged so far: <%= number_to_currency(@total_amount_pledged) %></p>
+  <p>Pledged so far: <%= number_to_currency(@project.total_amount_pledged) %></p>
   <p>Goal: <%= number_to_currency(@project.goal) %></p>
   <p>Category: <%= @project.category.name %></p>
   <time class="project-days-left">
@@ -51,9 +51,9 @@
 
 
  <!-- START Section for Users who have pledged -->
-  <% if current_user && @project.user_id = current_user.id %>
+  <% if current_user && @project.user_id == current_user.id %>
   <h3>Users who have pledged to your project:</h3>
-    <% @pledges.each do |pledge| %>
+    <% @project.pledges.each do |pledge| %>
       <div class="pledge">
         <p><%= pledge.user.first_name + " " + pledge.user.last_name + " | " %>Pledged: <%= number_to_currency(pledge.dollar_amount) %></p>
       </div>
@@ -62,9 +62,9 @@
   <!-- END Section for Users who have pledged -->
 
   <!-- START Section show progress-->
-  <% if current_user && @is_pledged_to_project%>
+  <% if current_user %>
 
-  <% if @progresses && @progresses.count > 0 %>
+  <% if @project.progresses && @progresses.count > 0 %>
     <% @progresses.each do |progress| %>
       <p><%= progress.created_at %>: <%= progress.message %></p>
     <% end  %>
@@ -74,7 +74,13 @@
 <!-- END Section show progress if pledged-->
 
 <!-- START Section for Project owner to update progress-->
-<% if current_user && @project.user_id == current_user.id %>
+<% if current_user && @project.user == current_user %>
+  <% puts "**********" %>
+  <% p @project.user%>
+  <% p @project %>
+  <% p current_user%>
+  <% puts "**********" %>
+
   <%= form_for [@project,@progress], :url => create_progress_path(@project.id) do |f| %>
     <p>
       <%= f.label :message %>
@@ -89,7 +95,7 @@
 <!-- END Section for Project owner to update progress-->
 
 <!-- START Section for pledger to add comment-->
-<% if current_user && @is_pledged_to_project%>
+<% if current_user && @project.is_pledged?(current_user)%>
   <%= form_for [@project,@comment], :url => create_comment_path(@project.id) do |f| %>
     <p>
       <%= f.label :message %>
