@@ -1,65 +1,75 @@
-<h1><%= @project.title %></h1>
+<div class="project-show">
+  <div class="project-details">
+  <h1><%= @project.title %></h1>
 
-<% if @project.image.present? %>
-  <%= image_tag @project.image %>
-<% end %>
+  <% if @project.image.present? %>
+    <%= image_tag @project.image %>
+  <% end %>
 
-<p><%= @project.description %></p>
-<% if @is_pledged_to_project %>
-  <p>You have pledged <%= number_to_currency(@my_total_pledged_to_project) %> to this project</p>
-<% end  %>
-<p>Pledged so far: <%= number_to_currency(@total_amount_pledged) %></p>
-<p>Goal: <%= number_to_currency(@project.goal) %></p>
-<p>Category: <%= @project.category.name %></p>
-<time class="project-days-left">
-  <%= icon('clock-o') %>
-  <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
-<p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
-<p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
-<p>Created by: <%= @project.user.first_name %> <%= @project.user.last_name %>
-  <span class="owner-link">[<%= link_to 'view profile', user_path(@project.user) %>]</span> </p>
+  <p><%= @project.description %></p>
+  <% if @is_pledged_to_project %>
+    <p>You have pledged <%= number_to_currency(@my_total_pledged_to_project) %> to this project</p>
+  <% end  %>
+  <p>Pledged so far: <%= number_to_currency(@total_amount_pledged) %></p>
+  <p>Goal: <%= number_to_currency(@project.goal) %></p>
+  <p>Category: <%= @project.category.name %></p>
+  <time class="project-days-left">
+    <%= icon('clock-o') %>
+    <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+  <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
+  <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+  <p>Created by: <%= @project.user.first_name %> <%= @project.user.last_name %>
+    <span class="owner-link">[<%= link_to 'view profile', user_path(@project.user) %>]</span> </p>
 
-<%= form_for [@project, Pledge.new] do |f| %>
-  <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
-  <%= f.submit "Pledge" %>
-<% end %>
 
-<h2>Rewards</h2>
-<% @project.rewards.each do |reward| %>
-  <p><%= number_to_currency(reward.dollar_amount) %></p>
-  <p><%= reward.description %></p>
-  <% if reward.max_claims %>
+  <%= form_for [@project, Pledge.new] do |f| %>
+    <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
+    <%= f.submit "Pledge" %>
+  <% end %>
+  </div>
+  <br>
+  <div class="reward-details">
+  <h2>Rewards</h2>
+  <% @project.rewards.each do |reward| %>
+    <p><%= number_to_currency(reward.dollar_amount) %></p>
+    <p><%= reward.description %></p>
+    <% if reward.max_claims %>
     <p>Available: <%= reward.max_claims %>, Claimed: <%= reward.total_claims %></p>
   <% else %>
     <p>Claimed: <%= reward.total_claims %></p>
   <% end %>
-  <p>
-    <small>
-      <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
-    </small>
-  </p>
-<% end %>
+    <p>
+      <small>
+        <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+      </small>
+    </p>
+  <% end %>
+ <% end %>
 
-<%= link_to "Add new reward", new_project_reward_path(@project) %>
 
-<!-- START If owner show users who have pledged -->
-<% if current_user && @project.user_id == current_user.id %>
-<h3>Users who have pledged to your project:</h3>
-  <% @pledges.each do |pledge| %>
-    <div class="pledge">
-      <p><%= pledge.user.first_name + " " + pledge.user.last_name + " | " %>Pledged: <%= number_to_currency(pledge.dollar_amount) %></p>
-    </div>
+  <%= link_to "Add new reward", new_project_reward_path(@project) %>
+
+
+ <!-- START Section for Users who have pledged -->
+  <% if current_user && @project.user_id = current_user.id %>
+  <h3>Users who have pledged to your project:</h3>
+    <% @pledges.each do |pledge| %>
+      <div class="pledge">
+        <p><%= pledge.user.first_name + " " + pledge.user.last_name + " | " %>Pledged: <%= number_to_currency(pledge.dollar_amount) %></p>
+      </div>
+    <% end  %>
   <% end  %>
-<% end  %>
-<!-- END If owner show users who have pledged -->
+  <!-- END Section for Users who have pledged -->
 
-<!-- START Section show progress if pledged-->
-<% if current_user && @is_pledged_to_project%>
+  <!-- START Section show progress-->
+  <% if current_user && @is_pledged_to_project%>
+
   <% if @progresses && @progresses.count > 0 %>
     <% @progresses.each do |progress| %>
       <p><%= progress.created_at %>: <%= progress.message %></p>
     <% end  %>
   <% end %>
+
 <% end  %>
 <!-- END Section show progress if pledged-->
 
@@ -72,7 +82,10 @@
       <%= f.submit "Add progress" %>
     </p>
   <% end  %>
-<% end  %>
+
+  </div>
+</div>
+
 <!-- END Section for Project owner to update progress-->
 
 <!-- START Section for pledger to add comment-->

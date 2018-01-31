@@ -23,4 +23,41 @@ class Project < ActiveRecord::Base
       errors.add(:end_date, "must be after start date")
     end
   end
+
+  def has_met_goal?
+    pledgetotal = 0
+
+    pledges.each do |pledge|
+      pledgetotal += pledge.dollar_amount
+    end
+
+    if goal <= pledgetotal
+      return true
+    else
+      return false
+    end
+  end
+
+  def num_pledged
+    project_bool = Project.all.map do |project|
+      if project.pledges.any?
+        1
+      else
+        0
+      end
+    end
+    project_bool.sum
+  end
+
+  def total_pledged
+    pledgetotal = 0
+
+    pledges.each do |pledge|
+      pledgetotal += pledge.dollar_amount
+    end
+
+    return pledgetotal
+  end
+
+
 end

@@ -6,6 +6,11 @@ class ProjectsController < ApplicationController
     @projects = @projects.order(:end_date)
   end
 
+  def home
+    @projects = Project.all
+    @num_projects = Project.first.num_pledged
+  end
+
   def show
     @project = Project.find(params[:id])
     @pledges = @project.pledges
