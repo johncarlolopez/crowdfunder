@@ -18,25 +18,11 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @pledges = @project.pledges
-    # Calculate total amount pledge to project
-    @total_amount_pledged = @pledges.sum(:dollar_amount)
-    # Default pledge to project as false unless there are pledges by user to project
-    if current_user
-      @my_pledges = @pledges.all.where('user_id = ?', current_user.id).all
-      if @my_pledges.count > 0
-        @is_pledged_to_project = true
-        @my_total_pledged_to_project = @my_pledges.sum(:dollar_amount)
-      else
-        @is_pledged_to_project = false
-      end
-    end
-    # Create Empty Comment and Progress objects to use in form_for
     @comment = Comment.new
     @progress = Progress.new
     # Collection of comments and progresses to be shown on page
     @comments = @project.comments.all.order(created_at: :desc)
-    @progresses = @project.progresses.all.order(created_at: :desc)
+    @progresses = @project.viewable_progresses(current_user)
   end
 
   def new
