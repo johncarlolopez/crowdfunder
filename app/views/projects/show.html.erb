@@ -62,25 +62,15 @@
   <!-- END Section for Users who have pledged -->
 
   <!-- START Section show progress-->
-  <% if current_user %>
-
   <% if @project.progresses && @progresses.count > 0 %>
     <% @progresses.each do |progress| %>
       <p><%= progress.created_at %>: <%= progress.message %></p>
     <% end  %>
-  <% end %>
-
 <% end  %>
 <!-- END Section show progress if pledged-->
 
 <!-- START Section for Project owner to update progress-->
 <% if current_user && @project.user == current_user %>
-  <% puts "**********" %>
-  <% p @project.user%>
-  <% p @project %>
-  <% p current_user%>
-  <% puts "**********" %>
-
   <%= form_for [@project,@progress], :url => create_progress_path(@project.id) do |f| %>
     <p>
       <%= f.label :message %>
