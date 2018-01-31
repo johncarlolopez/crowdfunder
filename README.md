@@ -105,7 +105,8 @@ ___
   * **(Complete)** Create a home page for the app that shows a summary of how many projects have been started, how many have been funded, how much money has been pledged towards successful projects in total
 ### Search
 ___
-  * As a user I want to be able to search for projects by name
+  * **(Complete)** As a user I want to be able to search for projects by name
+
 
 ## Our To-do list 
 
