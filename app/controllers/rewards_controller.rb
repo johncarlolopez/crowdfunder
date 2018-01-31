@@ -14,6 +14,7 @@ class RewardsController < ApplicationController
     if @reward.save
       redirect_to project_url(@project), notice: 'Reward created'
     else
+      flash.now[:alert] = @reward.errors.full_messages
       render :new
     end
   end
