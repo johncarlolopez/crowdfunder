@@ -18,7 +18,7 @@ class Pledge < ApplicationRecord
     if Time.now.utc.to_f < project.end_date.utc.to_f
       return true
     else
-      errors.add(:user, "You can't pledge to your own project")
+      errors.add(:user, "You can't pledge project that's ended")
       return false
     end
   end

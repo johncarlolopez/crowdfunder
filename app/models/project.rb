@@ -49,7 +49,6 @@ class Project < ActiveRecord::Base
   end
 
   def viewable_progresses(current_user)
-    #
     # binding.pry
     if has_met_goal? && is_passed_deadline? && !(is_pledged?(current_user))
       progresses.all.where("created_at < ?", end_date).order(created_at: :desc)
@@ -69,7 +68,7 @@ class Project < ActiveRecord::Base
       pledgetotal += pledge.dollar_amount
     end
 
-    if goal <= pledgetotal
+    if pledgetotal >= goal
       return true
     else
       return false
