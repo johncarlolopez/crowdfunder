@@ -115,6 +115,7 @@ ___
 * Transfer projects controller methods into model methods -> Then test them
 * Create my profile in the nav 
 * As a nonproject owner I shouldn't be able to make/remove rewards
+* Make a validation so that you cannot pledge to a project past it's deadline
 
 
 ## Resources
