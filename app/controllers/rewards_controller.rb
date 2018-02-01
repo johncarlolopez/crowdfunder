@@ -7,9 +7,6 @@ class RewardsController < ApplicationController
 
   def create
     @reward = @project.rewards.build(reward_params)
-    # @reward.dollar_amount = params[:reward][:dollar_amount]
-    # @reward.description = params[:reward][:description]
-    # @reward.max_claims = params[:reward][:max_claims]
 
     if !current_user
       redirect_to login_path, alert: 'Please log in'
@@ -35,11 +32,12 @@ class RewardsController < ApplicationController
     end
   end
 
+  private
+
   def reward_params
     params.require(:reward).permit(:dollar_amount, :description, :max_claims)
   end
 
-  private
 
   def load_project
     @project = Project.find(params[:project_id])
