@@ -114,6 +114,7 @@ ___
 * Seperate Rewards and Comments Sections
 * Transfer projects controller methods into model methods -> Then test them
 * Create my profile in the nav 
+* As a nonproject owner I shouldn't be able to make/remove rewards
 
 
 ## Resources
