@@ -40,6 +40,12 @@ class ProjectsController < ApplicationController
     # @project.image = params[:project][:image]
     @project.user = current_user
     # @project.category_id = params[:project][:category_id]
+    puts "***************"
+    ap @project.image
+    if @project.image == ""
+      @project.update(image: "http://americanconstruction.net/wp-content/uploads/2015/10/upload-empty.png")
+    end
+    puts "***************"
     if @project.save
       redirect_to projects_url
     else
@@ -75,7 +81,7 @@ class ProjectsController < ApplicationController
    end
 
    def project_params
-     params.require(:projects).permit(:title, :description, :goal, :start_date, :end_date, :image, :category_id)
+     params.require(:project).permit(:title, :description, :goal, :start_date, :end_date, :image, :category_id, :term)
    end
 
 end
