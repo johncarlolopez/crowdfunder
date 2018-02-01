@@ -17,10 +17,4 @@ class Reward < ActiveRecord::Base
       errors.add(:max_claims, ", if supplied, must be a positive number")
     end
   end
-
-  def index_total_claims_by_1
-    self.total_claims += 1
-    self.save
-  end
-
 end

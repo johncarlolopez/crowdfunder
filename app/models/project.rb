@@ -100,4 +100,8 @@ class Project < ActiveRecord::Base
     where('title ILIKE ?', "%#{sanitize_sql_like(term)}%")
   end
 
+  def ordered_comments
+    comments.all.order(created_at: :desc)
+  end
+
 end

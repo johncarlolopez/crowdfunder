@@ -54,15 +54,10 @@ class PledgeTest < ActiveSupport::TestCase
   end
 
   test 'total_claims is indexed by 1 if reward earned (no max_claims)' do
-    skip
-    # ask for help tomorrow, it's returning the reward, and showing the
-    # total_claims increasing in the return output, but then just calling
-    # reward in the pry, it shows total_claims at zero still
     reward = create(:reward, :small_no_max)
     pledge = create(:pledge, :medium_gets_smallest_reward, project: reward.project)
-    # binding.pry
     pledge.reward_claimed
-    reward.save
+    reward.reload
     assert_equal(1, reward.total_claims)
   end
 
@@ -78,7 +73,6 @@ class PledgeTest < ActiveSupport::TestCase
     pledge1 = create(:pledge, :large_gets_big_reward, project: big_reward.project)
     pledge2 = create(:pledge, :large_gets_big_reward, project: big_reward.project)
     pledge1.reward_claimed
-    # binding.pry
     assert_equal(small_reward, pledge2.reward_claimed)
   end
 

@@ -102,10 +102,12 @@
 
 <!-- START Section show comments-->
 
-  <% if @comments && @comments.count > 0 %>
-    <% @comments.each do |comment| %>
+  <% if @project.ordered_comments.any? %>
+    <% @project.ordered_comments.each do |comment| %>
       <p><%= comment.created_at %>: <%= comment.message %></p>
     <% end  %>
+  <% else %>
+      <p>No comments yet</p>
   <% end %>
 </div>
 <!-- END Section show comments-->
