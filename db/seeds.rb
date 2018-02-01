@@ -37,7 +37,7 @@ end
  5.times do
    project.rewards.create!(
      description: Faker::Superhero.power,
-     dollar_amount: rand(100),
+     dollar_amount: rand(3..100),
      max_claims: [nil, 5, 20].sample
    )
  end
