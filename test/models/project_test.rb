@@ -64,4 +64,25 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal( 2, Project.all.sample.num_pledged )
   end
 
+  test 'If the search function returns what it should return' do
+    project = create(:project, title: "Test Project")
+    # binding.pry
+    assert_equal(project, Project.search("Test").first)
+  end
+
+  test 'If the search function should not return' do
+    project = create(:project, title: "Test Project")
+    # binding.pry
+    assert_nil( Project.search("xxx").first )
+  end
+
+  test 'How much money has been pledged to a project' do
+    project = create(:project)
+    project.pledges.new(dollar_amount: 25)
+    project.pledges.new(dollar_amount: 100)
+    project.pledges.new(dollar_amount: 75)
+
+    assert_equal(200, project.total_pledged)
+  end
+
 end
