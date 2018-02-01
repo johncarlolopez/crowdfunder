@@ -40,16 +40,18 @@
     <p>Claimed: <%= reward.total_claims %></p>
     <% end %>
     <p>
+    <% if current_user == @project.user %>
       <small>
         <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
       </small>
+    <% end %>
     </p>
   <% end %>
 
 
-
-  <%= link_to "Add new reward", new_project_reward_path(@project) %>
-
+  <% if current_user == @project.user %>
+    <%= link_to "Add new reward", new_project_reward_path(@project) %>
+  <% end %>
 
  <!-- START Section for Users who have pledged -->
   <% if current_user && @project.user_id == current_user.id %>
