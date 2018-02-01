@@ -6,12 +6,23 @@ class Pledge < ApplicationRecord
   validates :dollar_amount, presence: true, numericality:{greater_than: 0}
   validates :user, presence: true
   validate :check_if_owner
+  validate :is_date_before_project_end?
 
   def check_if_owner
     if project.user == user
       errors.add(:user, "You can't pledge to your own project")
     end
   end
+
+  def is_date_before_project_end?
+    if Time.now.utc.to_f < project.end_date.utc.to_f
+      return true
+    else
+      errors.add(:user, "You can't pledge to your own project")
+      return false
+    end
+  end
+
 
   def reward_claimed  # this is only called upon creation of a pledge, as it indexes the total_claims column in the rewards table by 1
     project.rewards.order(dollar_amount: :desc).each do |reward|

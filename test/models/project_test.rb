@@ -103,4 +103,5 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal(false, project.current_user_pledges(user).include?(pledge_in_project_not_user), 'current_user_pledges must not return a pledge in project but not by user')
   end
 
+
 end

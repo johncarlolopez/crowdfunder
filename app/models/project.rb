@@ -29,7 +29,11 @@ class Project < ActiveRecord::Base
   end
 
   def current_user_pledges(current_user)
-    pledges.all.where('user_id = ?', current_user.id).all
+    if current_user
+      pledges.all.where('user_id = ?', current_user.id).all
+    else
+      []
+    end
   end
 
   def current_user_pledges_sum(current_user)
