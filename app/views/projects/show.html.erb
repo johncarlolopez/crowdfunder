@@ -79,13 +79,14 @@
       <%= f.submit "Add progress" %>
     </p>
   <% end  %>
-<% end  %>
+<% end %>
   </div>
 </div>
 
 <!-- END Section for Project owner to update progress-->
 
 <!-- START Section for pledger to add comment-->
+<div class="comments">
 <% if current_user && @project.is_pledged?(current_user)%>
   <%= form_for [@project,@comment], :url => create_comment_path(@project.id) do |f| %>
     <p>
@@ -98,9 +99,11 @@
 <!-- END Section for pledger to add comment-->
 
 <!-- START Section show comments-->
+
   <% if @comments && @comments.count > 0 %>
     <% @comments.each do |comment| %>
       <p><%= comment.created_at %>: <%= comment.message %></p>
     <% end  %>
   <% end %>
+</div>
 <!-- END Section show comments-->
