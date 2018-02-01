@@ -18,4 +18,9 @@ class Reward < ActiveRecord::Base
     end
   end
 
+  def index_total_claims_by_1
+    self.total_claims += 1
+    self.save
+  end
+
 end
