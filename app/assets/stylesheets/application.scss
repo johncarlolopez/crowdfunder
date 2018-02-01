@@ -17,50 +17,68 @@
 // Module styles
 @import 'projects';
 
+h3 {
+  text-align: center;
+  margin: 40px;
+}
+.project-show {
+  text-align: center;
+}
+.flash, .errors {
+  text-align: center;
+  background-color: lighten(cadetblue, 40%);
+  margin-bottom: 5px;
+  color: white;
+  padding: 5px 0px;
+}
 .form {
-  border: 1px black solid;
+  border: 3px cadetblue solid;
   border-radius: 3px;
   margin-left: 42%;
   padding: 25px;
   display: inline-block;
 }
-
+.form:hover{
+  background-color: lighten(cadetblue, 40%);
+}
 .form-project {
-  border: 1px black solid;
+  border: 3px cadetblue solid;
   border-radius: 3px;
   margin-left: 39%;
   padding: 25px;
   display: inline-block;
 }
-
-h3 {
-  text-align: center;
-  margin: 40px;
+.form-project:hover{
+  background-color: lighten(cadetblue, 40%);
 }
-
-.flash, .errors {
-  text-align: center;
-  background-color: crimson;
-  margin-bottom: 5px;
-  color: white;
-}
-
-.project-show {
-  text-align: center;
-}
-
 .project-details {
-  border: 1px black solid;
+  border: 3px cadetblue solid;
   border-radius: 3px;
   width: 50%;
   margin: auto;
   padding: 10px;
 }
-
+.product-details:hover{
+  background-color: lighten(cadetblue, 40%);
+}
 .reward-details {
-  border: 1px black solid;
+  border: 3px cadetblue solid;
   border-radius: 3px;
   width: 50%;
   margin: auto;
   padding: 10px;
+}
+.reward-details:hover{
+  background-color: lighten(cadetblue, 40%);
+}
+.comments {
+  border: 3px cadetblue solid;
+  border-radius: 3px;
+  width: 50%;
+  margin: 10px auto;
+  padding: 10px;
+  text-align: center;
+}
+.comments:hover{
+  background-color: lighten(cadetblue, 40%);
 }
