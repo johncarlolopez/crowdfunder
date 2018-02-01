@@ -111,7 +111,6 @@ ___
 ## Our To-do list
 
 * **(Complete)** Make a default image when project is created if image field is empty
-* If img url is not valid set to default image
 * **(Complete)** Seperate Rewards and Comments Sections
 * **(Complete)** Transfer projects controller methods into model methods -> Then test them
 * **(Complete)** Create my profile in the nav
