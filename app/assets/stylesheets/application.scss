@@ -28,7 +28,7 @@ h3 {
   text-align: center;
   background-color: lighten(cadetblue, 40%);
   margin-bottom: 5px;
-  color: white;
+  color: crimson;
   padding: 5px 0px;
 }
 .form {
@@ -80,5 +80,18 @@ h3 {
   text-align: center;
 }
 .comments:hover{
+  background-color: lighten(cadetblue, 40%);
+}
+.user {
+  border: 3px cadetblue solid;
+  border-radius: 3px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 30%;
+  padding: 25px;
+  display: inline-block;
+  text-align: center;
+}
+.user:hover{
   background-color: lighten(cadetblue, 40%);
 }
