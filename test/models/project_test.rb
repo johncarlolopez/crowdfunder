@@ -60,19 +60,16 @@ class ProjectTest < ActiveSupport::TestCase
   test 'How many projects have been pledged too' do
     pledge1 = create(:pledge)
     pledge2 = create(:pledge)
-    # binding.pry
     assert_equal( 2, Project.all.sample.num_pledged )
   end
 
   test 'If the search function returns what it should return' do
     project = create(:project, title: "Test Project")
-    # binding.pry
     assert_equal(project, Project.search("Test").first)
   end
 
   test 'If the search function should not return' do
     project = create(:project, title: "Test Project")
-    # binding.pry
     assert_nil( Project.search("xxx").first )
   end
 

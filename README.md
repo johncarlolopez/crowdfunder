@@ -115,7 +115,7 @@ ___
 * **(Complete)** Seperate Rewards and Comments Sections
 * **(Complete)** Transfer projects controller methods into model methods -> Then test them
 * **(Complete)** Create my profile in the nav
-* **(Complete)** As a non-project owner I shouldn't be able to make/remove rewards
+* As a non-project owner I shouldn't be able to make/remove rewards
 * **(Complete)** Make a validation so that you cannot pledge to a project past it's deadline
 * **(Complete)** As a backer I should be able to make a comment on a project I have backed
 * **(Complete)** Make logo link to homepage not projects#index
