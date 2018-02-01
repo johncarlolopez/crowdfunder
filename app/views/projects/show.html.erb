@@ -97,10 +97,12 @@
 <!-- END Section for pledger to add comment-->
 
 <!-- START Section show comments-->
+<div class="comments">
   <% if @comments && @comments.count > 0 %>
     <% @comments.each do |comment| %>
       <p><%= comment.created_at %>: <%= comment.message %></p>
     <% end  %>
   <% end %>
 <% end %>
+</div>
 <!-- END Section show comments-->
