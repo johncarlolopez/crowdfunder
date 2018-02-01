@@ -34,7 +34,6 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-    ap @project.image
     if @project.image == ""
       @project.update(image: "http://americanconstruction.net/wp-content/uploads/2015/10/upload-empty.png")
     end

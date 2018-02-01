@@ -6,10 +6,10 @@ class RewardsController < ApplicationController
   end
 
   def create
-    @reward = @project.rewards.build
-    @reward.dollar_amount = params[:reward][:dollar_amount]
-    @reward.description = params[:reward][:description]
-    @reward.max_claims = params[:reward][:max_claims]
+    @reward = @project.rewards.build(reward_params)
+    # @reward.dollar_amount = params[:reward][:dollar_amount]
+    # @reward.description = params[:reward][:description]
+    # @reward.max_claims = params[:reward][:max_claims]
 
     if !current_user
       redirect_to login_path, alert: 'Please log in'
@@ -33,6 +33,10 @@ class RewardsController < ApplicationController
       @reward.destroy
       redirect_to project_url(@project), notice: 'Reward successfully removed'
     end
+  end
+
+  def reward_params
+    params.require(:reward).permit(:dollar_amount, :description, :max_claims)
   end
 
   private
