@@ -21,11 +21,12 @@
   <p>Created by: <%= @project.user.first_name %> <%= @project.user.last_name %>
     <span class="owner-link">[<%= link_to 'view profile', user_path(@project.user) %>]</span> </p>
 
-
-  <%= form_for [@project, Pledge.new] do |f| %>
-    <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
-    <%= f.submit "Pledge" %>
-  <% end %>
+  <% if @pledge.is_date_before_project_end? %>
+    <%= form_for [@project, @pledge] do |f| %>
+      <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
+      <%= f.submit "Pledge" %>
+    <% end %>
+  <% end  %>
   </div>
   <br>
   <div class="reward-details">
@@ -62,7 +63,7 @@
   <!-- END Section for Users who have pledged -->
 
   <!-- START Section show progress-->
-  <% if @project.progresses && @progresses.count > 0 %>
+  <% if @project.progresses.any? && @progresses.count > 0 %>
     <% @progresses.each do |progress| %>
       <p><%= progress.created_at %>: <%= progress.message %></p>
     <% end  %>
@@ -78,7 +79,7 @@
       <%= f.submit "Add progress" %>
     </p>
   <% end  %>
-
+<% end  %>
   </div>
 </div>
 
@@ -93,7 +94,7 @@
       <%= f.submit "Add Comment" %>
     </p>
   <% end  %>
-<% end  %>
+<!-- <% end  %> -->
 <!-- END Section for pledger to add comment-->
 
 <!-- START Section show comments-->
@@ -102,5 +103,4 @@
       <p><%= comment.created_at %>: <%= comment.message %></p>
     <% end  %>
   <% end %>
-<% end %>
 <!-- END Section show comments-->
