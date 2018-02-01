@@ -49,4 +49,10 @@ class RewardTest < ActiveSupport::TestCase
     assert reward.invalid?, 'Reward should be invalid with max_claims being non-integer'
     assert reward.new_record?, 'Reward should not save with max_claims being non-integer'
   end
+
+  test 'index_total_claims_by_1 increases total claims by 1' do
+    reward = create(:reward)
+    reward.index_total_claims_by_1
+    assert_equal(1, reward.total_claims)
+  end
 end
