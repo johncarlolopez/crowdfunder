@@ -110,13 +110,14 @@ ___
 
 ## Our To-do list 
 
-* Make a default image when project is created if image field is empty
+* **(Complete)** Make a default image when project is created if image field is empty
+* If img url is not valid set to default image
 * Seperate Rewards and Comments Sections
-* Transfer projects controller methods into model methods -> Then test them
-* Create my profile in the nav 
+* **(Complete)** Transfer projects controller methods into model methods -> Then test them
+* Create my profile in the nav
 * As a nonproject owner I shouldn't be able to make/remove rewards
 * Make a validation so that you cannot pledge to a project past it's deadline
-* As a backer I should be able to make a comment on a project I have backed
+* **(Complete)** As a backer I should be able to make a comment on a project I have backed
 * Make logo link to homepage not projects#index
 
 
