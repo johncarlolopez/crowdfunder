@@ -64,4 +64,26 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal( 2, Project.all.sample.num_pledged )
   end
 
+  test 'Total amount pledge returns correct sum' do
+    project = create(:project)
+    create(:pledge, project: project, dollar_amount: 20)
+    create(:pledge, project: project, dollar_amount: 30)
+    create(:pledge, dollar_amount: 20)
+    assert_equal(50, project.total_amount_pledged, 'total_amount_pledged should return the sum of only pledges belonging to project')
+  end
+
+  test 'Current_user_pledges returns only pledges of project for user' do
+    project = create(:project)
+    user = create(:user)
+    first_pledge_in_project = create(:pledge, project: project, user: user)
+    second_pledge_in_project = create(:pledge, project: project, user: user)
+    pledge_not_in_project = create(:pledge, user: user)
+    pledge_in_project_not_user = create(:pledge, project: project,)
+    assert_equal(true, project.current_user_pledges(user).include?(first_pledge_in_project), 'current_user_pledges must return a pledge included in project')
+    assert_equal(true, project.current_user_pledges(user).include?(second_pledge_in_project), 'current_user_pledges must return a pledge included in project')
+    assert_equal(false, project.current_user_pledges(user).include?(pledge_not_in_project), 'current_user_pledges must not return a pledge not included in project')
+    assert_equal(false, project.current_user_pledges(user).include?(pledge_in_project_not_user), 'current_user_pledges must not return a pledge in project but not by user')
+  end
+
+
 end
