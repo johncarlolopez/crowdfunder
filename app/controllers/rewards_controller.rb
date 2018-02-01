@@ -11,7 +11,11 @@ class RewardsController < ApplicationController
     @reward.description = params[:reward][:description]
     @reward.max_claims = params[:reward][:max_claims]
 
-    if @reward.save
+    if !current_user
+      redirect_to login_path, alert: 'Please log in'
+    elsif current_user != @project.user
+      redirect_to project_url(@project), alert: 'You do not own this project'
+    elsif @reward.save
       redirect_to project_url(@project), notice: 'Reward created'
     else
       flash.now[:alert] = @reward.errors.full_messages
@@ -21,9 +25,14 @@ class RewardsController < ApplicationController
 
   def destroy
     @reward = Reward.find(params[:id])
-    @reward.destroy
-
-    redirect_to project_url(@project), notice: 'Reward successfully removed'
+    if !current_user
+      redirect_to login_path, alert: 'Please log in'
+    elsif current_user != @project.user
+      redirect_to project_url(@project), alert: 'You do not own this project'
+    else
+      @reward.destroy
+      redirect_to project_url(@project), notice: 'Reward successfully removed'
+    end
   end
 
   private
