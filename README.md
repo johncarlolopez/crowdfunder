@@ -113,6 +113,7 @@ ___
 * Make a default image when project is created if image field is empty
 * Seperate Rewards and Comments Sections
 * Transfer projects controller methods into model methods -> Then test them
+* Create my profile in the nav 
 
 
 ## Resources
